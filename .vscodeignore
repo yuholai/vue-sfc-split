@@ -1,9 +1,12 @@
 archive/**
 screenshots/**
 local/**
-*.local.*
+**/*.local.*
 .configs
 build/**
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
 
 .vscode/**
 .vscode-test/**
