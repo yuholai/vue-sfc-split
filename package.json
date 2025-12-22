@@ -1,0 +1,84 @@
+{
+  "name": "vue-sfc-split",
+  "displayName": "vue-sfc-split",
+  "description": "An extension that splits Vue Single File Components across multiple editor groups.",
+  "version": "0.0.1",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "vscode": "^1.107.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "publisher": "yuholai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yuholai/vue-sfc-split.git"
+  },
+  "activationEvents": [
+    "onLanguage:vue"
+  ],
+  "main": "./extension.mjs",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vue-sfc-split.splitFile",
+        "title": "Split file across tab groups",
+        "category": "Vue SFC Split"
+      },
+      {
+        "command": "vue-sfc-split.revealFile",
+        "title": "Reveal file across tab groups",
+        "category": "Vue SFC Split"
+      },
+      {
+        "command": "vue-sfc-split.closeFileTabs",
+        "title": "Close file tabs",
+        "category": "Vue SFC Split"
+      },
+      {
+        "command": "vue-sfc-split.closeDuplicateFileTabs",
+        "title": "Close duplicate file tabs",
+        "category": "Vue SFC Split"
+      }
+    ],
+    "menus": {
+      "editor/title/context": [
+        {
+          "command": "vue-sfc-split.splitFile",
+          "when": "resourceLangId == vue",
+          "group": "vue-sfc-split"
+        },
+        {
+          "command": "vue-sfc-split.revealFile",
+          "when": "resourceLangId == vue",
+          "group": "vue-sfc-split"
+        },
+        {
+          "command": "vue-sfc-split.closeFileTabs",
+          "when": "resourceLangId == vue",
+          "group": "vue-sfc-split"
+        },
+        {
+          "command": "vue-sfc-split.closeDuplicateFileTabs",
+          "when": "resourceLangId == vue",
+          "group": "vue-sfc-split"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "pnpm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.107.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "eslint": "^9.39.1",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
