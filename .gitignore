@@ -24,7 +24,6 @@ dist-ssr
 
 # App
 *.local.*
-screenshots/**
 pnpm-lock.*
 *.vsix
 .configs
