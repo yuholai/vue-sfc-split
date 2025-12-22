@@ -1,6 +1,6 @@
 {
   "name": "vue-sfc-split",
-  "displayName": "vue-sfc-split",
+  "displayName": "Vue SFC split",
   "description": "An extension that splits Vue Single File Components across multiple editor groups.",
   "version": "0.0.1",
   "license": "MIT",
@@ -11,6 +11,7 @@
   "categories": [
     "Other"
   ],
+  "icon": "images/icon.png",
   "publisher": "yuholai",
   "repository": {
     "type": "git",
