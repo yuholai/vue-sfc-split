@@ -8,15 +8,15 @@ An extension that split Vue SFC files across **first 3** editor groups, allowing
 
 Access commands via **context menu** in editor tabs or **command palette**.
 
-![editor title context menu](<screenshots/editor title context menu.PNG>)
+![editor title context menu](https://raw.githubusercontent.com/yuholai/vue-sfc-split/refs/heads/main/screenshots/editor-title-context-menu.PNG)
 
 **Split** a **Vue SFC** across up to 3 editor groups. The extension folds/unfolds specific blocks—`<template>`, `<script>`, and `<style>` automatically.
 
-![3 columns split](<screenshots/3 columns split.PNG>)
+![3 columns split](https://raw.githubusercontent.com/yuholai/vue-sfc-split/refs/heads/main/screenshots/3-columns-split.PNG)
 
 Handle files with 1-3+ blocks.
 
-![split with more blocks](<screenshots/splits with more blocks.PNG>)
+![split with more blocks](https://raw.githubusercontent.com/yuholai/vue-sfc-split/refs/heads/main/screenshots/splits-with-more-blocks.PNG)
 
 **Reveal** file - Bring file to front across **first 3** editor groups. This is useful when too many files are opened and you want to focus on a specific file.
 
