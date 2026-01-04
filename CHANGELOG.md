@@ -4,6 +4,12 @@ All notable changes to the "vue-sfc-split" extension will be documented in this 
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.0.2] - 05/01/2025
+
+### Added
+
+- Show progress in status bar when splitting files
+
 ## [0.0.1] - 22/12/2025
 
 ### Added
