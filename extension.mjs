@@ -69,37 +69,69 @@ export function activate(context) {
           )
         );
 
-        for (
-          let i = 0,
-            ie = Math.min(viewColumns.length, majorBlockFoldingRanges.length);
-          i < ie;
-          ++i
-        ) {
-          const viewColumn = viewColumns[i];
-          const rangesToUnfold =
-            ie - i > 1
-              ? [majorBlockFoldingRanges[i]]
-              : majorBlockFoldingRanges.slice(i);
-          const rangesToFold = majorBlockFoldingRanges.filter(
-            (range) => !rangesToUnfold.includes(range)
-          );
+        const numberOfGroups = Math.min(
+          viewColumns.length,
+          majorBlockFoldingRanges.length
+        );
 
-          await vscode.window.showTextDocument(documentOrUri, {
+        const progressLocation = vscode.ProgressLocation.Window;
+
+        const majorBlockFoldingRangesStart = majorBlockFoldingRanges.map(
+          (range) => range.start
+        );
+
+        const showTextDocument = async (viewColumn) =>
+          vscode.window.showTextDocument(documentOrUri, {
             viewColumn,
             preserveFocus: false,
             preview: false,
           });
-          await vscode.commands.executeCommand(builtInCommands.unfold, {
-            level: 1,
-            direction: "down",
-            selectionLines: rangesToUnfold.map((range) => range.start),
-          });
-          await vscode.commands.executeCommand(builtInCommands.fold, {
-            level: 1,
-            direction: "down",
-            selectionLines: rangesToFold.map((range) => range.start),
-          });
-        }
+
+        await vscode.window.withProgress(
+          {
+            title: "Splitting file",
+            cancellable: false,
+            location: progressLocation,
+          },
+          async (progress) => {
+            for (let i = 0; i < numberOfGroups; ++i) {
+              const viewColumn = viewColumns[i];
+              const toFold = [...majorBlockFoldingRangesStart];
+              const toUnfold = toFold.splice(
+                i,
+                i < numberOfGroups - 1 ? 1 : Infinity
+              );
+
+              progress.report({
+                message: `Opening file in editor group ${viewColumn}`,
+              });
+
+              const editor = await showTextDocument(viewColumn);
+
+              if (!editor) documentOrUri = editor.document;
+
+              progress.report({
+                message: "Unfolding",
+              });
+
+              await vscode.commands.executeCommand(builtInCommands.unfold, {
+                selectionLines: toUnfold,
+                direction: "down",
+                level: 1,
+              });
+
+              progress.report({
+                message: "Folding",
+              });
+
+              await vscode.commands.executeCommand(builtInCommands.fold, {
+                selectionLines: toFold,
+                direction: "down",
+                level: 1,
+              });
+            }
+          }
+        );
       }
     ),
 
